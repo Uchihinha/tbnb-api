@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  db:
+    container_name: tbnb-db
+    image: postgres
+    volumes:
+      - tbnb_pgsql_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: tbnb@123
+      POSTGRES_DB: tbnb_stock
+      POSTGRES_USER: tbnb
+    ports:
+      - "5432:5432"
+
+  db-test:
+    container_name: tbnb-db-test
+    image: postgres
+    volumes:
+      - test_tbnb_pgsql_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: tbnb@123
+      POSTGRES_DB: tbnb_stock
+      POSTGRES_USER: tbnb
+    ports:
+      - "5433:5432"
+
+  app:
+    build: ./
+    container_name: tbnb-api
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - "8080:8080"
+    links:
+      - db
+      - db-test
+
+volumes:
+  tbnb_pgsql_volume:
+  test_tbnb_pgsql_volume:
