@@ -12,8 +12,8 @@ class ProductRequest extends FormRequest
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'sku' => 'string',
-            'barcode' => 'string',
+            'sku' => '',
+            'barcode' => '',
             'stock_quantity' => 'required|numeric'
         ];
     }
