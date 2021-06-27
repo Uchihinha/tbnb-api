@@ -10,7 +10,9 @@ class BaseGetRequest extends FormRequest
     {
         return [
             'page' => 'numeric',
-            'paginate' => 'numeric'
+            'paginate' => 'numeric',
+            'order' => 'string',
+            'order_field' => 'string',
         ];
     }
 }

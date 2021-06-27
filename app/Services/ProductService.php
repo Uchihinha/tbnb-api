@@ -18,8 +18,16 @@ class ProductService extends BaseService {
         return $this->modelInstance->create($params);
     }
 
-    public function get($paginate = 20) : LengthAwarePaginator {
-        return $this->modelInstance->paginate($paginate);
+    public function get(object $params) : LengthAwarePaginator {
+        $params->order_field ??= 'id';
+        $params->order ??= 'asc';
+        $params->paginate ??= 20;
+
+        $data = $this->modelInstance
+        ->orderBy($params->order_field, $params->order)
+        ->paginate($params->paginate);
+
+        return $data;
     }
 
     public function update(int $id, array $params) : Product {

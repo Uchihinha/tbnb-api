@@ -28,7 +28,9 @@ class ProductController extends Controller
     }
 
     public function get(BaseGetRequest $request) : JsonResponse {
-        $data = $this->serviceInstance->get($request->paginate);
+        $params = (object) $request->validated();
+
+        $data = $this->serviceInstance->get($params);
 
         return response()->json(new PaginateResource($data));
     }
