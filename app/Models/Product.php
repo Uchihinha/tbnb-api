@@ -18,7 +18,7 @@ class Product extends BaseModel
     ];
 
     protected $casts = [
-        'price' => 'float'
+        'price' => 'decimal:2'
     ];
 
     protected static function booted() {

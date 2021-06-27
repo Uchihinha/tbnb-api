@@ -41,7 +41,7 @@ class ProductService extends BaseService {
     public function getStockHistory(int $id) : Collection {
         $product = $this->modelInstance->findOrFail($id);
 
-        $history = $product->stockHistory;
+        $history = $product->stockHistory->sortByDesc('created_at')->values();
 
         return $history;
 
