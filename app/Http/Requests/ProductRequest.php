@@ -13,7 +13,7 @@ class ProductRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required|numeric',
             'sku' => '',
-            'barcode' => '',
+            'barcode' => 'max:13',
             'stock_quantity' => 'required|numeric'
         ];
     }
