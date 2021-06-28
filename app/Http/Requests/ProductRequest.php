@@ -11,7 +11,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0.01',
             'sku' => '',
             'barcode' => 'max:13',
             'stock_quantity' => 'required|numeric'
