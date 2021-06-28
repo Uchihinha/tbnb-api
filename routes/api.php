@@ -16,5 +16,4 @@ Route::prefix('products')->group(function($router) {
     $router->put('{id}', 'ProductController@update');
     $router->get('{id}', 'ProductController@find');
     $router->delete('{id}', 'ProductController@delete');
-
 });
