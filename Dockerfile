@@ -6,8 +6,8 @@ RUN rm /etc/apk/repositories
 ADD https://packages.whatwedo.ch/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 RUN echo "https://packages.whatwedo.ch/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
 
-# COPY ./start.sh /usr/local/bin/start
-# RUN chmod u+x /usr/local/bin/start
+COPY ./start.sh /usr/local/bin/start
+RUN chmod u+x /usr/local/bin/start
 
 RUN apk update && \
     apk add php7-dev@php --force-broken-world && \
@@ -22,8 +22,20 @@ RUN apk update && \
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-USER ambientum
+RUN sudo ln -s /etc/nginx/sites/$FRAMEWORK.conf /etc/nginx/sites/enabled.conf
+RUN nohup /usr/sbin/php-fpm -y /etc/php7/php-fpm.conf -F -O 2>&1 &
+
+# USER ambientum
 
 WORKDIR /var/www/app
 
-# CMD ["/usr/local/bin/start"]
+COPY . .
+
+RUN composer install
+
+RUN chmod 777 -R storage
+
+EXPOSE 8080
+
+# CMD ["nginx"]
+CMD ["/usr/local/bin/start"]
