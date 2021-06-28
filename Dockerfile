@@ -6,8 +6,8 @@ RUN rm /etc/apk/repositories
 ADD https://packages.whatwedo.ch/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 RUN echo "https://packages.whatwedo.ch/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
 
-# COPY ./start.sh /usr/local/bin/start
-# RUN chmod u+x /usr/local/bin/start
+COPY ./start.sh /usr/local/bin/start
+RUN chmod u+x /usr/local/bin/start
 
 RUN apk update && \
     apk add php7-dev@php --force-broken-world && \
@@ -26,4 +26,4 @@ USER ambientum
 
 WORKDIR /var/www/app
 
-# CMD ["/usr/local/bin/start"]
+CMD ["/usr/local/bin/start"]
