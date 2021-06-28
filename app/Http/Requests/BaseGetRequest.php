@@ -13,6 +13,7 @@ class BaseGetRequest extends FormRequest
             'paginate' => 'numeric',
             'order' => 'string',
             'order_field' => 'string',
+            'search' => ''
         ];
     }
 }

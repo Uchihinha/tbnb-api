@@ -25,6 +25,10 @@ class ProductService extends BaseService {
 
         $data = $this->modelInstance
         ->orderBy($params->order_field, $params->order)
+        ->when(isset($params->search), function($w) use($params) {
+            $w->where('name', 'like', "%$params->search%")
+            ->orWhere('description', 'like', "%$params->search%");
+        })
         ->paginate($params->paginate);
 
         return $data;
