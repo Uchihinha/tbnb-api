@@ -4,10 +4,6 @@
 
 This application aims to simulate a stock management system. It was used PHP Laravel Framework (8.40) + PostgreSQL + Docker.
 
-## Live Demo
-
-You can get live demo in the following link: https://tbnb-api.herokuapp.com
-
 ## Installation
 
 You need to have Docker installed in your environment.
